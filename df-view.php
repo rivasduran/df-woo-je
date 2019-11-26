@@ -57,6 +57,20 @@ function ver_formularios_j(){
 		}
 
 	}
+
+	if(isset($_POST['borrarc_produc_tags'])){
+		$forms = $_POST['borrarc_produc_tags'];
+
+		//AQUI ELIMINAREMOS
+
+		$wpdb->delete(
+					"{$wpdb->prefix}df_tags",
+					array(
+						'form' 			=> $forms
+					)
+				);
+
+	}
 ?>
 	<h1>Crear Tags de formulario:</h1>
 
@@ -189,6 +203,7 @@ function ver_formularios_j(){
 								-->
 							</strong>
 
+							<!--
 							<div class="row-actions">
 								<span class="edit">
 									<a href="<?php echo $actual_link."&amp;edit=".$tags->id; ?>" aria-label="Editar “Página de ejemplo”">Editar</a> | 
@@ -198,6 +213,7 @@ function ver_formularios_j(){
 									<a href="<?php echo $actual_link."&amp;eliminarUsuario=".$tags->id; ?>" class="submitdelete" aria-label="Mover “Página de ejemplo” a la papelera">Papelera</a> | 
 								</span>
 							</div>
+							-->
 						</td>	
 
 						<td>
@@ -233,6 +249,7 @@ function ver_formularios_j(){
 						<td>
 							<strong>
 	<?php 
+								/*
 								$categori = $tags->status;
 
 								$statusG = $wpdb->get_results("SELECT name FROM {$table_categorias} WHERE id = {$categori}");
@@ -242,8 +259,16 @@ function ver_formularios_j(){
 								}
 
 								echo $categori; 
+								*/
 	?>
 							</strong>
+
+							<form method="post" action="">
+								<!-- AQUI ENVIAMOS A ELIMINAR LA RELACION COMLETA ENTRE EL FORMULARIO  -->
+								<input type="hidden" name="borrarc_produc_tags" value="<?php echo $tags->id; ?>">
+								<button type="submit">Eliminar</button>
+							</form>
+
 						</td>
 					</tr>
 				</tbody>
@@ -286,7 +311,21 @@ function ver_formularios_cat_pro(){
 
 			echo "<div class='respuestaResultado'><h1>Relacionado con exito</h1></div>";
 		}
+	}
 
+	//SI EL ENVIO ES DE ELIMINAR
+	if(isset($_POST['eliminar_relacion_f_p'])){
+		//RESCATAMOS EL ID DEL INPUT QUE QUIERO ELIMINAR
+		$formulario = $_POST['eliminar_relacion_f_p'];
+		
+		$wpdb->delete(
+				"{$wpdb->prefix}df_form",
+				array(
+					'form'		=> $formulario
+				)
+		);
+		
+		echo "<div class='respuestaResultado'><h1>Eliminado adecuadamente</h1></div>";
 	}
 ?>
 	<h1>Relacionar Formularios con productos:</h1>
@@ -401,6 +440,7 @@ function ver_formularios_cat_pro(){
 								-->
 							</strong>
 
+							<!--
 							<div class="row-actions">
 								<span class="edit">
 									<a href="<?php echo $actual_link."&amp;edit=".$tags->id; ?>" aria-label="Editar “Página de ejemplo”">Editar</a> | 
@@ -410,6 +450,7 @@ function ver_formularios_cat_pro(){
 									<a href="<?php echo $actual_link."&amp;eliminarUsuario=".$tags->id; ?>" class="submitdelete" aria-label="Mover “Página de ejemplo” a la papelera">Papelera</a> | 
 								</span>
 							</div>
+							-->
 						</td>	
 
 						<td>
@@ -441,6 +482,7 @@ function ver_formularios_cat_pro(){
 						<td>
 							<strong>
 	<?php 
+								/*
 								$categori = $tags->status;
 
 								$statusG = $wpdb->get_results("SELECT name FROM {$table_categorias} WHERE id = {$categori}");
@@ -450,7 +492,15 @@ function ver_formularios_cat_pro(){
 								}
 
 								echo $categori; 
+
+								echo "<br>";
+								*/
 	?>
+								<form method="post" action="">
+									<!-- AQUI ENVIAMOS A ELIMINAR LA RELACION COMLETA ENTRE EL FORMULARIO  -->
+									<input type="hidden" name="eliminar_relacion_f_p" value="<?php echo $tags->id; ?>">
+									<button type="submit">Eliminar</button>
+								</form>
 							</strong>
 						</td>
 					</tr>
@@ -492,6 +542,18 @@ function ver_formularios_red(){
 					)
 				);
 		}
+	}
+
+
+	//ELIMINAMOS LO CREADO
+	if(isset($_POST['eliminarc_produc_red'])){
+		$idFormulario = $_POST['eliminarc_produc_red'];
+		$wpdb->delete(
+					"{$wpdb->prefix}df_red",
+					array(
+						'form'			=> $idFormulario
+					)
+				);
 	}
 ?>
 	<h1>Relacionar productos con la red:</h1>
@@ -628,6 +690,7 @@ function ver_formularios_red(){
 								-->
 							</strong>
 
+							<!--
 							<div class="row-actions">
 								<span class="edit">
 									<a href="<?php echo $actual_link."&amp;edit=".$tags->id; ?>" aria-label="Editar “Página de ejemplo”">Editar</a> | 
@@ -637,6 +700,7 @@ function ver_formularios_red(){
 									<a href="<?php echo $actual_link."&amp;eliminarUsuario=".$tags->id; ?>" class="submitdelete" aria-label="Mover “Página de ejemplo” a la papelera">Papelera</a> | 
 								</span>
 							</div>
+							-->
 						</td>	
 
 						<td>
@@ -665,6 +729,7 @@ function ver_formularios_red(){
 						<td>
 							<strong>
 	<?php 
+								/*
 								$categori = $tags->status;
 
 								$statusG = $wpdb->get_results("SELECT name FROM {$table_categorias} WHERE id = {$categori}");
@@ -674,8 +739,14 @@ function ver_formularios_red(){
 								}
 
 								echo $categori; 
+								*/
 	?>
 							</strong>
+							<form method="post" action="">
+								<!-- AQUI ENVIAMOS A ELIMINAR LA RELACION COMLETA ENTRE EL FORMULARIO  -->
+								<input type="hidden" name="eliminarc_produc_red" value="<?php echo $tags->form; ?>">
+								<button type="submit">Eliminar</button>
+							</form>
 						</td>
 					</tr>
 				</tbody>
