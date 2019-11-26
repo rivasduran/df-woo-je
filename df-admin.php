@@ -29,6 +29,8 @@ function show_admin_jleague( $atts ) {
 
 	//AL FINAL TENEMOS LA RELACION DE LOS FORMULARIOS Y LOS ID DE LA RED
 	ver_formularios_red();
+
+	//ESTO SI ESTA FUNCIONANDO
 }
 add_shortcode( 'showaj', 'show_admin_jleague' );
 
